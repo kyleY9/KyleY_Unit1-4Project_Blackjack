@@ -1,2 +1,4 @@
-package PACKAGE_NAME;public class Blackjack {
+public class Blackjack {
+
+    // instance variables
 }
