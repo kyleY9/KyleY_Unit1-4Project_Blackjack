@@ -5,6 +5,9 @@ public class BlackjackRunner {
         // creating scanner object for receiving user input
         Scanner scan = new Scanner(System.in);
 
-        //
+        // introduction
+        Blackjack obj = new Blackjack();
+        System.out.println(obj.rand1to11());
+        System.out.println(obj.rand1to2());
     }
 }
