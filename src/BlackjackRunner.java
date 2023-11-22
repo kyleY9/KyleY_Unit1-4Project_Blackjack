@@ -17,15 +17,17 @@ public class BlackjackRunner {
 
         // start game
         obj.gameP1();
-        System.out.print("Do you want to hit or stay? ");
+        System.out.print("\nDo you want to \"Hit\" or \"Stay\"? ");
         String decision = scan.nextLine();
         while (!(decision.equals("Hit") || decision.equals("Stay"))) {
-            System.out.print("Hit or stay? ");
+            System.out.print("Hit or Stay? ");
             decision = scan.nextLine();
         }
         Blackjack obj2 = new Blackjack(decision);
         while (!(decision.equals("Stay"))) {
             obj2.gameP2();
+            System.out.print("Hit or Stay? ");
+            decision = scan.nextLine();
         }
         obj2.gameP2();
     }
