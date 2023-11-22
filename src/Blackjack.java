@@ -4,16 +4,16 @@ public class Blackjack {
     private String decision;
 
     // regular variables
-    int playerCard1 = rand1to11();
-    int playerCard2 = rand1to11();
-    int playerCard3 = rand1to11();
-    int playerCard4 = rand1to11();
-    int playerCard5 = rand1to11();
+    String playerStr = "Your Hand: ";
+    String botStr = "~(o_o)~: ???, ";
+    int cardIdx;
+    int botIdx;
+    int totalValue;
+    int botValue;
 
-    int unrevealedBotCard = rand1to11();
-    int botCard2 = rand1to11();
-    int botCard3 = rand1to11();
-    int botCard4 = rand1to11();
+    // arrays
+    int[] playerHand = {rand1to11(), rand1to11(), rand1to11(), rand1to11(), rand1to11(), rand1to11()};
+    int[] botHand = {rand1to11(), rand1to11(), rand1to11(), rand1to11(), rand1to11(), rand1to11()};
 
     // constructor
     public Blackjack() {
@@ -25,13 +25,40 @@ public class Blackjack {
     // methods
     public void gameP1() {
         System.out.println("\nThe dealer distributes the cards ...");
-        System.out.println("Your hand: " + rand1to11() + ", " + rand1to11());
-        System.out.println("~(o_o)~: ???, " + rand1to11());
+        playerStr += playerHand[0] + ", " + playerHand[1];
+        botStr += botHand[1];
+        totalValue += playerHand[0] + playerHand[1];
+        botValue += botHand[0] + botHand[1];
+        cardIdx = 1;
+        botIdx = 1;
+        System.out.println(playerStr);
+        System.out.println(botStr);
     }
 
     public void gameP2() {
-
+        if (decision.equals("Hit")) {
+            System.out.println("You hit. A card has been added to your hand");
+            playerStr += ", " + playerHand[cardIdx + 1];
+            totalValue += playerHand[cardIdx + 1];
+            cardIdx++;
+            if (totalValue > 21) {
+                System.out.println("Over 21! You bust! Defeat. :<");
+                return;
+            }
+        } else {
+            System.out.println("You stay. No changing your card values now.");
+            System.out.println("It's the dealer's turn now.");
+            if (botValue <= 16) {
+                while (botValue <= 16) {
+                    System.out.println("~(o_o)~: Hit me");
+                    botStr += botHand[botIdx + 1];
+                    botValue += botHand[botIdx + 1];
+                    botIdx++;
+                }
+            }
+        }
     }
+
 
 
     // helper methods

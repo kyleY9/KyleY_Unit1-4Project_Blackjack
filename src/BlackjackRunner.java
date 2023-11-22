@@ -24,5 +24,9 @@ public class BlackjackRunner {
             decision = scan.nextLine();
         }
         Blackjack obj2 = new Blackjack(decision);
+        while (!(decision.equals("Stay"))) {
+            obj2.gameP2();
+        }
+        obj2.gameP2();
     }
 }
