@@ -3,13 +3,13 @@ import java.util.Scanner;
 public class BlackjackRunner {
     public static void main(String[] args) throws InterruptedException  {
         // color variables!
-        String BLACK_TEXT = "\u001B[30m";
-        String RED_BK = "\u001B[41m";
-        String RESET = "\u001B[0m";
+        final String BLACK_TEXT = "\u001B[30m";
+        final String RED_BK = "\u001B[41m";
+        final String RESET = "\u001B[0m";
 
         // creating scanner object for receiving user input
         Scanner scan = new Scanner(System.in);
-        Blackjack obj = new Blackjack();
+        Blackjack obj1 = new Blackjack();
 
         // introduction
         System.out.print(BLACK_TEXT + RED_BK + "Welcome to Blackjack" + RESET);
@@ -22,7 +22,7 @@ public class BlackjackRunner {
         }
 
         // start game
-        obj.gameP1();
+        obj1.gameP1();
         Thread.sleep(1500);
         System.out.print("\nDo you want to \"Hit\" or \"Stay\"? ");
         String decision = scan.nextLine();
@@ -42,5 +42,7 @@ public class BlackjackRunner {
             obj2.setDecision(decision);
         }
         obj2.gameP2();
+        Thread.sleep(1500);
+        obj2.gameP3();
     }
 }

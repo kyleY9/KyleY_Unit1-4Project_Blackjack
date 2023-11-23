@@ -36,7 +36,7 @@ public class Blackjack {
         }
     }
 
-    // constructor
+    // constructor (overloaded)
     public Blackjack() {
     }
 
@@ -45,7 +45,8 @@ public class Blackjack {
     }
 
     // methods
-    public void gameP1() throws InterruptedException {
+    //instead of creating one entire game method, I split it into three to reduce clutter
+    public void gameP1() throws InterruptedException {  //game part 1
         System.out.println("\nThe dealer distributes the cards ...");
         playerStr += playerHand[0] + ", " + playerHand[1];
         botStr += botHand[1];
@@ -59,7 +60,7 @@ public class Blackjack {
         System.out.println(botStr);
     }
 
-    public void gameP2() throws InterruptedException {
+    public void gameP2() throws InterruptedException { //game part 2
         if (decision.equals("Hit")) {
             Thread.sleep(1000);
             System.out.println("You hit. A card has been added to your hand");
@@ -92,28 +93,31 @@ public class Blackjack {
                 }
             }
             Thread.sleep(1500);
-            System.out.println("\nIt's time for the final comparison");
-            Thread.sleep(1500);
-            System.out.println(playerStr);
-            Thread.sleep(1500);
-            System.out.println(botStr);
-            Thread.sleep(1500);
-            System.out.println("Dealer's unrevealed card: " + botHand[0]);
-            Thread.sleep(1500);
-            System.out.println("\nYour total: " + totalValue + "\nDealer's total: " + botValue);
-            Thread.sleep(1500);
-            if (botValue > 21) {
-                System.out.println(GREEN_TEXT + "The dealer busts! You automatically win!" + RESET);
-            } else if (totalValue > botValue) {
-                System.out.println(GREEN_TEXT + "You beat the dealer! Congrats! He'll get you back next time though ..." + RESET);
-            } else if (totalValue < botValue) {
-                System.out.println(RED_TEXT + "The dealer beat you ... you can hear his laughter as he mocks your failure." + RESET);
-            } else {
-                System.out.println("Wow! You two got the same score. The dealer is ... perturbed <(-_-)>");
-            }
+            System.out.println("~(o_o)~: I'm going to stay.");
         }
     }
 
+    public void gameP3() throws InterruptedException { //game part 3
+        System.out.println("\nIt's time for the final comparison");
+        Thread.sleep(1500);
+        System.out.println(playerStr);
+        Thread.sleep(1500);
+        System.out.println(botStr);
+        Thread.sleep(1500);
+        System.out.println("Dealer's unrevealed card: " + botHand[0]);
+        Thread.sleep(1500);
+        System.out.println("\nYour total: " + totalValue + "\nDealer's total: " + botValue);
+        Thread.sleep(1500);
+        if (botValue > 21) {
+            System.out.println(GREEN_TEXT + "The dealer busts! You automatically win!" + RESET);
+        } else if (totalValue > botValue) {
+            System.out.println(GREEN_TEXT + "You beat the dealer! Congrats! He'll get you back next time though ..." + RESET);
+        } else if (totalValue < botValue) {
+            System.out.println(RED_TEXT + "The dealer beat you ... you can hear his laughter as he mocks your failure." + RESET);
+        } else {
+            System.out.println("Wow! You two got the same score. The dealer is ... perturbed <(-_-)>");
+        }
+    }
 
     // helper methods
     public void setDecision(String decision) {
