@@ -3,17 +3,32 @@ public class Blackjack {
     // instance variables
     private String decision;
 
-    // regular variables
-    String playerStr = "Your Hand: ";
-    String botStr = "~(o_o)~: ???, ";
-    int cardIdx;
-    int botIdx;
-    int totalValue = 0;
-    int botValue = 0;
+    // color variables!
+    final String RED_TEXT = "\u001B[31m";
+    final String GREEN_TEXT = "\u001B[32m";
+    final String RESET = "\u001B[0m";
 
-    // arrays
-    int[] playerHand = {rand1to11(), rand1to11(), rand1to11(), rand1to11(), rand1to11(), rand1to11()};
-    int[] botHand = {rand1to11(), rand1to11(), rand1to11(), rand1to11(), rand1to11(), rand1to11()};
+    // static variables (shared by all instances of the class)
+    private static String playerStr = "Your Hand: ";
+    private static String botStr = "~(o_o)~: ???, ";
+    private static int cardIdx = 0;
+    private static int botIdx = 0;
+    private static int totalValue = 0;
+    private static int botValue = 0;
+
+
+    //  static arrays (shared by all instances of the class)
+    private static final int[] playerHand;
+    private static final int[] botHand;
+    static {
+        int arraySize = 5;
+        playerHand = new int[arraySize];
+        botHand = new int[arraySize];
+        for (int i = 0; i < arraySize; i++) {
+            playerHand[i] = rand1to11();
+            botHand[i] = rand1to11();
+        }
+    }
 
     // constructor
     public Blackjack() {
@@ -24,52 +39,66 @@ public class Blackjack {
     }
 
     // methods
-    public void gameP1() {
+    public void gameP1() throws InterruptedException {
         System.out.println("\nThe dealer distributes the cards ...");
         playerStr += playerHand[0] + ", " + playerHand[1];
         botStr += botHand[1];
         totalValue += playerHand[0] + playerHand[1];
         botValue += botHand[0] + botHand[1];
-        cardIdx = 1;
-        botIdx = 1;
+        cardIdx++;
+        botIdx++;
+        Thread.sleep(1500);
         System.out.println(playerStr);
+        Thread.sleep(1500);
         System.out.println(botStr);
     }
 
-    public void gameP2() {
+    public void gameP2() throws InterruptedException {
         if (decision.equals("Hit")) {
+            Thread.sleep(1000);
             System.out.println("You hit. A card has been added to your hand");
             playerStr += ", " + playerHand[cardIdx + 1];
             totalValue += playerHand[cardIdx + 1];
             cardIdx++;
+            Thread.sleep(1000);
             System.out.println(playerStr);
+            Thread.sleep(1000);
             if (totalValue > 21) {
-                System.out.println("Over 21! You bust! Defeat. :<");
-                return;
+                System.out.println(RED_TEXT + "Over 21! You bust! Defeat. :<" + RESET);
             } else if (totalValue == 21) {
-                System.out.println("Blackjack! You win!!! :D");
-                return;
+                System.out.println(GREEN_TEXT + "Blackjack! You win!!! :D" + RESET);
             }
         } else if (decision.equals("Stay")) {
             System.out.println("You stay. No changing your card values now.");
+            Thread.sleep(1500);
             System.out.println("\nIt's the dealer's turn.");
             if (botValue <= 16) {
                 while (botValue <= 16) {
-                    System.out.println("~(o_o)~: Hit me");
                     botStr += ", " + botHand[botIdx + 1];
                     botValue += botHand[botIdx + 1];
                     botIdx++;
+                    Thread.sleep(1500);
+                    System.out.println("~(o_o)~: Hit me");
+                    Thread.sleep(1500);
+                    System.out.println(botStr);
                 }
             }
             System.out.println("\nIt's time for the final comparison");
+            Thread.sleep(1500);
             System.out.println(playerStr);
+            Thread.sleep(1500);
             System.out.println(botStr);
-            System.out.println("Dealer's unrevealed card: " + botHand[1]);
-            System.out.println("Your total: " + totalValue + "\nDealer's total: " + botValue);
-            if (totalValue > botValue) {
-                System.out.println("You beat the dealer! Congrats! He'll get you back next time though ...");
+            Thread.sleep(1500);
+            System.out.println("Dealer's unrevealed card: " + botHand[0]);
+            Thread.sleep(1500);
+            System.out.println("\nYour total: " + totalValue + "\nDealer's total: " + botValue);
+            Thread.sleep(1500);
+            if (botValue > 21) {
+                System.out.println(GREEN_TEXT + "The dealer busts! You automatically win!" + RESET);
+            } else if (totalValue > botValue) {
+                System.out.println(GREEN_TEXT + "You beat the dealer! Congrats! He'll get you back next time though ..." + RESET);
             } else if (totalValue < botValue) {
-                System.out.println("The dealer beat you ... you can hear his laughter as he mocks your failure.");
+                System.out.println(RED_TEXT + "The dealer beat you ... you can hear his laughter as he mocks your failure." + RESET);
             } else {
                 System.out.println("Wow! You two got the same score. The dealer is ... perturbed <(-_-)>");
             }
@@ -78,7 +107,10 @@ public class Blackjack {
 
 
     // helper methods
-    public int rand1to11() {
+    public void setDecision(String decision) {
+        this.decision = decision;
+    }
+    public static int rand1to11() {
         return (int) (Math.random() * 11) + 1;
     }
 }
