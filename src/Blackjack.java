@@ -20,13 +20,19 @@ public class Blackjack {
     //  static arrays (shared by all instances of the class)
     private static final int[] playerHand;
     private static final int[] botHand;
-    static {
-        int arraySize = 5;
+    static { // initializes all arrays as soon as the class loads in
+        int arraySize = 8;
         playerHand = new int[arraySize];
         botHand = new int[arraySize];
         for (int i = 0; i < arraySize; i++) {
             playerHand[i] = rand1to11();
             botHand[i] = rand1to11();
+            while ((playerHand[0] == 11 && playerHand[1] == 11)) {
+                playerHand[0] = rand1to11(); // ensures the player doesn't bust immediately by chance
+            }
+            while ((botHand[0] == 11 && botHand[1] == 11)) {
+                botHand[0] = rand1to11();
+            }
         }
     }
 
@@ -65,10 +71,12 @@ public class Blackjack {
             Thread.sleep(1000);
             if (totalValue > 21) {
                 System.out.println(RED_TEXT + "Over 21! You bust! Defeat. :<" + RESET);
+                System.exit(0);
             } else if (totalValue == 21) {
                 System.out.println(GREEN_TEXT + "Blackjack! You win!!! :D" + RESET);
+                System.exit(0);
             }
-        } else if (decision.equals("Stay")) {
+        } else {
             System.out.println("You stay. No changing your card values now.");
             Thread.sleep(1500);
             System.out.println("\nIt's the dealer's turn.");
@@ -83,6 +91,7 @@ public class Blackjack {
                     System.out.println(botStr);
                 }
             }
+            Thread.sleep(1500);
             System.out.println("\nIt's time for the final comparison");
             Thread.sleep(1500);
             System.out.println(playerStr);

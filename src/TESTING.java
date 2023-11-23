@@ -8,5 +8,7 @@ public class TESTING {
         int idx = 1;
         str += ", " + nums[idx + 1];
         System.out.println(str);
+        System.exit(0);
+        System.out.println(str);
     }
 }
