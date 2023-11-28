@@ -21,7 +21,7 @@ public class Blackjack {
     private static final int[] playerHand;
     private static final int[] botHand;
     static { // initializes all arrays as soon as the class loads in
-        int arraySize = 8;
+        int arraySize = 10;
         playerHand = new int[arraySize];
         botHand = new int[arraySize];
         for (int i = 0; i < arraySize; i++) {
