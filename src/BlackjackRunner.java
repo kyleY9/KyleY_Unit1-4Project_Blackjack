@@ -9,7 +9,7 @@ public class BlackjackRunner {
 
         // creating scanner object for receiving user input
         Scanner scan = new Scanner(System.in);
-        Blackjack obj1 = new Blackjack();
+        Blackjack obj1 = new Blackjack(); // first object instantiation
 
         // introduction
         System.out.print(BLACK_TEXT + RED_BK + "Welcome to Blackjack" + RESET);
@@ -30,7 +30,7 @@ public class BlackjackRunner {
             System.out.print("Hit or Stay? ");
             decision = scan.nextLine();
         }
-        Blackjack obj2 = new Blackjack(decision);
+        Blackjack obj2 = new Blackjack(decision); // second object instantiation
         while (!(decision.equals("Stay"))) {
             obj2.gameP2();
             System.out.print("Hit or Stay? ");

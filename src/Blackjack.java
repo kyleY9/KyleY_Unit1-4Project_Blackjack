@@ -63,7 +63,7 @@ public class Blackjack {
     public void gameP2() throws InterruptedException { //game part 2
         if (decision.equals("Hit")) {
             Thread.sleep(1000);
-            System.out.println("You hit. A card has been added to your hand");
+            System.out.println(this);
             playerStr += ", " + playerHand[cardIdx + 1];
             totalValue += playerHand[cardIdx + 1];
             cardIdx++;
@@ -78,7 +78,7 @@ public class Blackjack {
                 System.exit(0);
             }
         } else {
-            System.out.println("You stay. No changing your card values now.");
+            System.out.println(this);
             Thread.sleep(1500);
             System.out.println("\nIt's the dealer's turn.");
             if (botValue <= 16) {
@@ -123,7 +123,17 @@ public class Blackjack {
     public void setDecision(String decision) {
         this.decision = decision;
     }
+
     public static int rand1to11() {
         return (int) (Math.random() * 11) + 1;
+    }
+
+    public String toString() { //toString method: immediately called when an object is printed
+        boolean hitOrStay = decision.equals("Hit");
+        if (hitOrStay) {
+            return decision + ". A card has been added to your hand.";
+        } else {
+            return decision + ". Your hand is set. No changing your card values now.";
+        }
     }
 }
